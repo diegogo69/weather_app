@@ -13,7 +13,7 @@ module.exports = {
   plugins: [
     // Handling HTML
     new HtmlWebpackPlugin({
-      template: "./src/template.html",
+      template: "./src/static/template.html",
     }),
   ],
   module: {
@@ -25,10 +25,10 @@ module.exports = {
       },
 
       // Load images from HTML using HTML-Loader
-      {
-        test: /\.html$/i,
-        loader: "html-loader",
-      },
+      // {
+      //   test: /\.html$/i,
+      //   loader: "html-loader",
+      // },
 
       // Load images on JavaScript via asset/resource rule
       {

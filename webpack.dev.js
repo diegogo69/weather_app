@@ -9,6 +9,6 @@ module.exports = merge(common, {
   devtool: "eval-source-map",
   devServer: {
     // Additional files for reloading server
-    watchFiles: ["./src/template.html"],
+    watchFiles: ["./src/static/template.html"],
   },
 });
