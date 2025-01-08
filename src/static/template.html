@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
-    
+    <header>
+        <div class="app-logo">
+            Weather app
+        </div>
+
+        <div class="search-container">
+            <form class="search-form">
+                <label for="search"></label>
+                <input type="search" name="search" id="search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <!-- Summary -->
+        <div class="summary-container">
+            <div class="resolved-address"></div>
+            <div class="conditions"></div>
+            <div class="datetime"></div>
+            <div class="temp"></div>
+            <div class="weather-icon"></div>
+        </div>
+        
+        <!-- Details -->
+        <div class="details-container">
+            <div class="description"></div>
+            <div class="feelslike"></div>
+            <div class="humidity"></div>
+            <div class="windspeed"></div>
+            <div class="minmax"></div>
+            <div class="sunrise"></div>
+            <div class="sunset"></div>
+            <div class="moonphase"></div>
+        </div>
+    </main>
 </body>
+
 </html>

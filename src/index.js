@@ -2,41 +2,10 @@
 import "./static/css/modern-normalize.css";
 import "./static/css/styles.css";
 
-const API_KEY = 'JEPSLX6ZDSGFY6GFXGTRNWS9J';
-// Get weather from location
-async function fetchWeather(location) {
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${API_KEY}`;
+import { fetchWeather } from "./static/js/fetch_weather";
+import { parseWeather } from "./static/js/parseWeather";
 
-    const fetchResponse = await fetch(url, {mode: 'cors'});
-    return await fetchResponse.json();
-}
-
-// Process JSON data from request and return object with selected data
-function parseWeather (data) {
-    console.log(data);
-    const resolvedAddress = data.resolvedAddress;
-    const today = data.days[0];
-    const parsedToday = parseToday(today);
-
-    return {resolvedAddress, ...parsedToday}
-}
-
-function parseToday(today) {
-    return {
-        description: today.description,
-        conditions: today.conditions,
-        datetime: today.datetime,
-        temp: today.temp,
-        tempmin: today.tempmin,
-        tempmax: today.tempmax,
-        feelslike: today.feelslike,
-        humidity: today.humidity,
-        moonphase: today.moonphase,
-        sunrise: today.sunrise,
-        sunset: today.sunset,
-        icon: today.icon
-    }
-}
+import { domInit } from "./static/js/dom_init";
 
 async function main() {
     const weather = await fetchWeather('caracas');
@@ -45,7 +14,9 @@ async function main() {
         
 }
 
-main()
+
+domInit()
+// main()
 // Setup a form for user input and request weather of location
 
 
@@ -54,17 +25,3 @@ main()
 
 
 
-const keys = [
-    'description',
-    'conditions',
-    'datetime',
-    'temp',
-    'tempmin',
-    'tempmax',
-    'feelslike',
-    'humidity',
-    'moonphase',
-    'sunrise',
-    'sunset',
-    'icon'
-]
