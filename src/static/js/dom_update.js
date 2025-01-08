@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export { domUpdate }
 const main = document.querySelector('main');
 
@@ -20,6 +22,9 @@ const sunrise = detailsContainer.querySelector('.sunrise');
 const sunset = detailsContainer.querySelector('.sunset');
 const moonphase = detailsContainer.querySelector('.moonphase');
 
+const weekContainer = main.querySelector('.week-container');
+const weekDays = weekContainer.querySelectorAll('.week-day');
+
 const domNodes = {
     icon: weatherIcon,
     resolvedAddress,
@@ -35,6 +40,8 @@ const domNodes = {
     moonphase,
     sunrise,
     sunset,
+
+    days: null,
 }
 
 function domUpdate(data) {
@@ -42,9 +49,30 @@ function domUpdate(data) {
         if (key === 'minmax') {
             domNodes[key].textContent = `Min: ${data.tempmin} / Max: ${data.tempmax}`;
             continue
+        } else if (key === 'days') {
+            updateWeek(data[key]);
+            continue
         }
         
         domNodes[key].textContent = data[key];
 
     } 
+}
+
+function updateWeek(days) {
+    console.log(format(new Date(), 'EEEE'))
+    for (let i = 0; i < days.length; i++) {
+        const dayNode = weekDays[i].querySelector('.day');
+        const iconNode = weekDays[i].querySelector('.weather-icon');
+        
+        if (i === 0) {
+            dayNode.textContent = 'Tomorrow';
+        } else {
+            // Somehow the dot at the end normalizes the date
+            const datetime = `${days[i]['datetime']}.`;
+            dayNode.textContent = format(new Date(datetime), 'EEEE');
+        }
+
+        iconNode.textContent = days[i]['icon'];
+    }
 }

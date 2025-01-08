@@ -19,6 +19,7 @@ header {
     align-items: center;
     gap: 1rem;
     height: 4rem;
+    padding: 0 1rem;
 }
 
 main {
@@ -29,11 +30,15 @@ main {
     grid-template-areas: 
         'summary details'
         'week week';
+    gap: 1rem;
+    padding: 1rem;
+    
 }
 
 .summary-container {
     grid-area: summary;
     display: grid;
+    grid-template-columns: min-content 1fr;
 }
 
 .details-container {
@@ -47,6 +52,30 @@ main {
 .week-container {
     grid-area: week;
     display: flex;
+}
+
+.week-day {
+    flex: 1;
+}
+
+.resolved-address {
+    grid-column: 1 / -1;
+}
+
+.weather-icon {
+    grid-column: 1 / 2;
+}
+
+.temp {
+    grid-column: 2 / -1;
+}
+
+.datetime {
+    grid-column: 1 / -1;
+}
+
+.conditions {
+    grid-column: 1 / -1;
 }
 
 .description {
