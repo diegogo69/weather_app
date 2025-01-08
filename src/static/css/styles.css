@@ -1,3 +1,58 @@
 svg {
     width: 24px;
 }
+
+* {
+    outline: 2px solid red;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 4rem;
+}
+
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas: 
+        'summary details'
+        'week week';
+}
+
+.summary-container {
+    grid-area: summary;
+    display: grid;
+}
+
+.details-container {
+    grid-area: details;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr;
+}
+
+.week-container {
+    grid-area: week;
+    display: flex;
+}
+
+.description {
+    grid-column: 1 / -1;
+}
+
+.minmax {
+    grid-column: 1 / 3;
+}

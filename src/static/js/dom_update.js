@@ -21,19 +21,20 @@ const sunset = detailsContainer.querySelector('.sunset');
 const moonphase = detailsContainer.querySelector('.moonphase');
 
 const domNodes = {
+    icon: weatherIcon,
     resolvedAddress,
     description,
     conditions,
     datetime,
     temp,
+
+    minmax,
     feelslike,
     humidity,
     windspeed,
-    minmax,
     moonphase,
     sunrise,
     sunset,
-    icon: weatherIcon
 }
 
 function domUpdate(data) {
