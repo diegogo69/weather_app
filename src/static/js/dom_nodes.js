@@ -38,36 +38,38 @@ const domNodes = {
     details: {
         description: {
             node: description
-        },
-        // minmax : {
-        //     node: minmax
-        // },
-         
+        },         
         tempmin: {
             node: tempmin,
-            icon: 'thermometer-exterior'
+            icon: 'thermometer-exterior',
+            unit: '°F'
         },
         tempmax: {
             node: tempmax,
-            icon: 'thermometer'
+            icon: 'thermometer',
+            unit: '°F'
         },
         // feelslike,
         humidity: {
             node: humidity,
             icon: 'humidity',
+            unit: '%'
         },
         windspeed: {
             node: windspeed,
-            icon: 'strong-wind'
+            icon: 'strong-wind',
+            unit: 'mph'
         },
         // moonphase,
         sunrise: {
             node: sunrise,
-            icon: 'sunrise'
+            icon: 'sunrise',
+            unit: 'hour'
         },
         sunset: {
             node: sunset,
-            icon: 'sunset'
+            icon: 'sunset',
+            unit: 'hour'
         }
     },
 

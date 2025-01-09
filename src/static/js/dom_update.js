@@ -22,7 +22,9 @@ function updateSummary(summary, data) {
     for (let key in summary) {
         if (key === 'datetime') {
             summary[key].textContent = format(data[key], 'EEEE, MMM do')
-            continue
+
+        } else if (key === 'temp') {
+            summary[key].textContent = `${data[key]} °F`;
 
         } else if (key === 'icon') {
             const icon = data[key].replaceAll('-', '_');
@@ -34,11 +36,9 @@ function updateSummary(summary, data) {
 
             clearNode(summary[key]);
             summary[key].appendChild(img);
-
-            continue
+        } else {
+            summary[key].textContent = data[key];
         }
-
-        summary[key].textContent = data[key];
     }
 }
 
@@ -54,9 +54,18 @@ function updateDetails(details, data) {
         title.textContent = capitalize(key);
         detailNode.appendChild(title);
 
+        const unit = details[key]['unit'] || '';
+
         const text = document.createElement('p');
         text.classList.add('text');
-        text.textContent = capitalize(data[key]);
+
+        if (unit === 'hour') {
+            // Ramdon date for formatting time as 12h am/pm 
+            const date = `2011-11-11T${data[key]}`;
+            text.textContent = format(date, 'hh:mmaaa')
+        } else {
+            text.textContent = `${data[key]}${unit}`;
+        }
         detailNode.appendChild(text);
 
         const iconName = details[key]['icon'];
@@ -67,7 +76,6 @@ function updateDetails(details, data) {
             icon.innerHTML = `<i class="wi wi-${iconName}"></i>`
             detailNode.appendChild(icon);
         }
-        // If icon add icon
     }
 }
 
