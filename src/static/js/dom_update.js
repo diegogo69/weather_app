@@ -57,6 +57,9 @@ function domUpdate(data) {
             continue
         } else if (key === 'icon') {
             domNodes[key].innerHTML = `<i class="wi wi-${data[key]}"></i>`;
+            const img = document.createElement('img');
+            img.src = `./static/svg/weather_icons/${data[key]}`
+
             continue
         }
         
