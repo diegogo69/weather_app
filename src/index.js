@@ -1,6 +1,10 @@
 // Import CSS
 import "./static/css/modern-normalize.css";
 import "./static/css/styles.css";
+// import "./static/css/weather-icons-wind.css";
+import "./static/css/weather-icons-wind.min.css";
+// import "./static/css/weather-icons.css";
+import "./static/css/weather-icons.min.css";
 
 import { fetchWeather } from "./static/js/fetch_weather";
 import { parseWeather } from "./static/js/parseWeather";

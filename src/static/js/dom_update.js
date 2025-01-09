@@ -52,6 +52,12 @@ function domUpdate(data) {
         } else if (key === 'days') {
             updateWeek(data[key]);
             continue
+        } else if (key === 'datetime') {
+            domNodes[key].textContent = format(data[key], 'EEEE, MMM do')
+            continue
+        } else if (key === 'icon') {
+            domNodes[key].innerHTML = `<i class="wi wi-${data[key]}"></i>`;
+            continue
         }
         
         domNodes[key].textContent = data[key];
@@ -73,6 +79,7 @@ function updateWeek(days) {
             dayNode.textContent = format(new Date(datetime), 'EEEE');
         }
 
-        iconNode.textContent = days[i]['icon'];
+        // iconNode.textContent = days[i]['icon'];
+        iconNode.innerHTML = `<i class="wi wi-${days[i]['icon'].replace('-partly', '')}"></i>`;
     }
 }
