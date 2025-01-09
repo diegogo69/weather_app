@@ -1,4 +1,4 @@
-export { handlers }
+export { handlers, capitalize }
 
 import { fetchWeather } from "./fetch_weather";
 import { parseWeather } from "./parseWeather";
@@ -28,3 +28,7 @@ const handlers = ( function() {
         searchWeather,
     }
 } )()
+
+function capitalize(s) {
+    return String(s).charAt(0).toUpperCase() + String(s).slice(1);
+}

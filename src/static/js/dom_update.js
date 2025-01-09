@@ -1,101 +1,99 @@
+export { domUpdate }
+
 import { format } from "date-fns";
 import { icons } from "./icons";
 import { clearNode } from "./dom_handlers";
-
-export { domUpdate }
-const main = document.querySelector('main');
-
-const summaryContainer = main.querySelector('.summary-container');
-
-const resolvedAddress = summaryContainer.querySelector('.resolved-address');
-const conditions = summaryContainer.querySelector('.conditions');
-const datetime = summaryContainer.querySelector('.datetime');
-const temp = summaryContainer.querySelector('.temp');
-const weatherIcon = summaryContainer.querySelector('.weather-icon');
-
-const detailsContainer = main.querySelector('.details-container');
-
-const description = detailsContainer.querySelector('.description');
-const feelslike = detailsContainer.querySelector('.feelslike');
-const humidity = detailsContainer.querySelector('.humidity');
-const windspeed = detailsContainer.querySelector('.windspeed');
-const minmax = detailsContainer.querySelector('.minmax');
-const sunrise = detailsContainer.querySelector('.sunrise');
-const sunset = detailsContainer.querySelector('.sunset');
-const moonphase = detailsContainer.querySelector('.moonphase');
-
-const weekContainer = main.querySelector('.week-container');
-const weekDays = weekContainer.querySelectorAll('.week-day');
-
-const domNodes = {
-    icon: weatherIcon,
-    resolvedAddress,
-    description,
-    conditions,
-    datetime,
-    temp,
-
-    minmax,
-    feelslike,
-    humidity,
-    windspeed,
-    moonphase,
-    sunrise,
-    sunset,
-
-    days: null,
-}
+import { domNodes } from "./dom_nodes";
+import { capitalize } from "./handlers";
 
 function domUpdate(data) {
     for (let key in domNodes) {
-        if (key === 'minmax') {
-            domNodes[key].textContent = `Min: ${data.tempmin} / Max: ${data.tempmax}`;
-            continue
+        if (key === 'summary') {
+            updateSummary(domNodes[key], data) 
         } else if (key === 'days') {
-            updateWeek(data[key]);
+            updateWeek(domNodes[key], data[key]);
+        } else if (key === 'details') {
+            updateDetails(domNodes[key], data);
+        }
+    }
+}
+
+function updateSummary(summary, data) {
+    for (let key in summary) {
+        if (key === 'datetime') {
+            summary[key].textContent = format(data[key], 'EEEE, MMM do')
             continue
-        } else if (key === 'datetime') {
-            domNodes[key].textContent = format(data[key], 'EEEE, MMM do')
-            continue
+
         } else if (key === 'icon') {
             const icon = data[key].replaceAll('-', '_');
             // console.log('icon: ', icon);
 
             const img = document.createElement('img');
+            img.classList.add('icon', 'weather-icon');
             img.src = icons[icon];
 
-            clearNode(domNodes[key]);   
-            domNodes[key].appendChild(img);
+            clearNode(summary[key]);
+            summary[key].appendChild(img);
 
             continue
         }
-        
-        domNodes[key].textContent = data[key];
 
-    } 
+        summary[key].textContent = data[key];
+    }
 }
 
-function updateWeek(days) {
+// function updateDetails( { description, tempmin, tempmax, feelslike, humidiy, windspeed, moonphase, sunrise, sunset}) {
+function updateDetails(details, data) {
+    for (let key in details) {
+
+        const detailNode = details[key]['node'];
+
+        // Add text to node. If text
+        const title = document.createElement('header');
+        title.classList.add('title');
+        title.textContent = capitalize(key);
+        detailNode.appendChild(title);
+
+        const text = document.createElement('p');
+        text.classList.add('text');
+        text.textContent = capitalize(data[key]);
+        detailNode.appendChild(text);
+
+        const iconName = details[key]['icon'];
+
+        if (iconName) {
+            const icon = document.createElement('div');
+            icon.classList.add('icon');
+            icon.innerHTML = `<i class="wi wi-${iconName}"></i>`
+            detailNode.appendChild(icon);
+        }
+        // If icon add icon
+    }
+}
+
+function updateWeek(weekDays, data) {
     console.log(format(new Date(), 'EEEE'))
-    for (let i = 0; i < days.length; i++) {
+
+    for (let i = 0; i < data.length; i++) {
         const dayNode = weekDays[i].querySelector('.day');
         const iconNode = weekDays[i].querySelector('.weather-icon');
-        
+
         if (i === 0) {
             dayNode.textContent = 'Tomorrow';
         } else {
             // Somehow the dot at the end normalizes the date
-            const datetime = `${days[i]['datetime']}.`;
+            const datetime = `${data[i]['datetime']}.`;
             dayNode.textContent = format(new Date(datetime), 'EEEE');
         }
 
-        const icon = days[i]['icon'].replaceAll('-', '_');
+        const icon = data[i]['icon'].replaceAll('-', '_');
         // console.log('icon: ', icon);
 
         const img = document.createElement('img');
+        img.classList.add('icon');
         img.src = icons[icon];
 
-        clearNode(iconNode);   
+        clearNode(iconNode);
         iconNode.appendChild(img);
 
     }

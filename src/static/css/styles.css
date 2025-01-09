@@ -21,7 +21,7 @@ body {
     --dark: #09090b;
 }
 
-header {
+body > header {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -117,4 +117,5 @@ main {
 
 .minmax {
     grid-column: 1 / 3;
+    display: flex;
 }
