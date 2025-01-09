@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { icons } from "./icons";
 
 export { domUpdate }
 const main = document.querySelector('main');
@@ -56,9 +57,14 @@ function domUpdate(data) {
             domNodes[key].textContent = format(data[key], 'EEEE, MMM do')
             continue
         } else if (key === 'icon') {
-            domNodes[key].innerHTML = `<i class="wi wi-${data[key]}"></i>`;
+            // domNodes[key].innerHTML = `<i class="wi wi-${data[key]}"></i>`;
+            const icon = data[key].replaceAll('-', '_');
+            console.log('icon: ', icon);
+
             const img = document.createElement('img');
-            img.src = `./static/svg/weather_icons/${data[key]}`
+            img.src = icons[icon];
+
+            domNodes[key].appendChild(img);
 
             continue
         }
