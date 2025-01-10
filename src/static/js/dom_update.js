@@ -31,6 +31,9 @@ function updateSummary(summary, data) {
             case 'temp':
                 summary[key].textContent = `${data[key]} °F`;
                 break;
+            case 'feelslike':
+                summary[key].textContent = `Feelslike ${data[key]} °F`;
+                break;
             case 'icon':
                 const icon = data[key].replaceAll('-', '_');
                 const img = document.createElement('img');
