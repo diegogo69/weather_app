@@ -8,36 +8,41 @@ import { capitalize } from "./handlers";
 
 function domUpdate(data) {
     for (let key in domNodes) {
-        if (key === 'summary') {
-            updateSummary(domNodes[key], data) 
-        } else if (key === 'days') {
-            updateWeek(domNodes[key], data[key]);
-        } else if (key === 'details') {
-            updateDetails(domNodes[key], data);
+        switch (key) {
+            case 'summary':
+                updateSummary(domNodes[key], data);
+                break;
+            case 'details':
+                updateDetails(domNodes[key], data);
+                break;
+            case 'days':
+                updateWeek(domNodes[key], data[key]);
+                break;
         }
     }
 }
 
 function updateSummary(summary, data) {
     for (let key in summary) {
-        if (key === 'datetime') {
-            summary[key].textContent = format(data[key], 'EEEE, MMM do')
+        switch (key) {
+            case 'datetime':
+                summary[key].textContent = format(data[key], 'EEEE, MMM do');
+                break;
+            case 'temp':
+                summary[key].textContent = `${data[key]} °F`;
+                break;
+            case 'icon':
+                const icon = data[key].replaceAll('-', '_');
+                const img = document.createElement('img');
+                img.classList.add('icon', 'weather-icon');
+                img.src = icons[icon];
 
-        } else if (key === 'temp') {
-            summary[key].textContent = `${data[key]} °F`;
-
-        } else if (key === 'icon') {
-            const icon = data[key].replaceAll('-', '_');
-            // console.log('icon: ', icon);
-
-            const img = document.createElement('img');
-            img.classList.add('icon', 'weather-icon');
-            img.src = icons[icon];
-
-            clearNode(summary[key]);
-            summary[key].appendChild(img);
-        } else {
-            summary[key].textContent = data[key];
+                clearNode(summary[key]);
+                summary[key].appendChild(img);
+                break;
+            default:
+                summary[key].textContent = data[key];
+                break;
         }
     }
 }
@@ -45,7 +50,7 @@ function updateSummary(summary, data) {
 // function updateDetails( { description, tempmin, tempmax, feelslike, humidiy, windspeed, moonphase, sunrise, sunset}) {
 function updateDetails(details, data) {
     for (let key in details) {
-
+        // Item of details elements
         const detailNode = details[key]['node'];
 
         // Add text to node. If text
@@ -85,6 +90,7 @@ function updateWeek(weekDays, data) {
     for (let i = 0; i < data.length; i++) {
         const dayNode = weekDays[i].querySelector('.day');
         const iconNode = weekDays[i].querySelector('.weather-icon');
+        const conditions = weekDays[i].querySelector('.conditions');
 
         if (i === 0) {
             dayNode.textContent = 'Tomorrow';
@@ -95,7 +101,6 @@ function updateWeek(weekDays, data) {
         }
 
         const icon = data[i]['icon'].replaceAll('-', '_');
-        // console.log('icon: ', icon);
 
         const img = document.createElement('img');
         img.classList.add('icon');
@@ -104,5 +109,6 @@ function updateWeek(weekDays, data) {
         clearNode(iconNode);
         iconNode.appendChild(img);
 
+        conditions.textContent = data[i]['conditions'];
     }
 }
