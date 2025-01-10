@@ -5,20 +5,20 @@ const main = document.querySelector('main');
 const summaryContainer = main.querySelector('.summary-container');
 
 const resolvedAddress = summaryContainer.querySelector('.resolved-address');
-const conditions = summaryContainer.querySelector('.conditions');
 const datetime = summaryContainer.querySelector('.datetime');
 const temp = summaryContainer.querySelector('.temp');
+const feelslike = summaryContainer.querySelector('.feelslike');
+const conditions = summaryContainer.querySelector('.conditions');
 const weatherIcon = summaryContainer.querySelector('.weather-icon');
 
 const detailsContainer = main.querySelector('.details-container');
 
 const description = detailsContainer.querySelector('.description');
-const feelslike = detailsContainer.querySelector('.feelslike');
 const humidity = detailsContainer.querySelector('.humidity');
 const windspeed = detailsContainer.querySelector('.windspeed');
-const minmax = detailsContainer.querySelector('.minmax');
-const tempmin = minmax.querySelector('.tempmin');
-const tempmax = minmax.querySelector('.tempmax');
+// const minmax = detailsContainer.querySelector('.minmax');
+const tempmin = detailsContainer.querySelector('.tempmin');
+const tempmax = detailsContainer.querySelector('.tempmax');
 const sunrise = detailsContainer.querySelector('.sunrise');
 const sunset = detailsContainer.querySelector('.sunset');
 const moonphase = detailsContainer.querySelector('.moonphase');
@@ -33,6 +33,7 @@ const domNodes = {
         conditions,
         datetime,
         temp,
+        feelslike
     },
 
     details: {
@@ -49,7 +50,6 @@ const domNodes = {
             icon: 'thermometer',
             unit: '°F'
         },
-        // feelslike,
         humidity: {
             node: humidity,
             icon: 'humidity',

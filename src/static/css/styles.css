@@ -26,7 +26,7 @@ body > header {
     align-items: center;
     gap: 1rem;
     height: 4rem;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 
 main {
@@ -38,7 +38,7 @@ main {
         'summary details'
         'week week';
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 2rem 2rem;
     
 }
 .summary-container,
@@ -61,9 +61,44 @@ main {
 .details-container {
     grid-area: details;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 2fr 2fr;
-    
+}
+
+.details-container .description {
+    grid-column: 1 / -1;
+    grid-row: 1;
+
+    font-size: 1.2rem;
+    align-self: center;
+}
+
+.details-container > div {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    grid-template-areas: 
+        "det-icon det-header"
+        "det-icon det-value";
+}
+
+.details-container header {
+    grid-area: det-header;
+    font-weight: 900;
+    align-self: end;
+}
+
+.details-container p {
+    grid-area: det-value;
+}
+
+.details-container .icon {
+    grid-area: det-icon;
+    align-self: center;
+    justify-self: center;
+    padding: .4rem;
+}
+.details-container i {
+    font-size: 3.5rem;
 }
 
 .week-container {
@@ -84,22 +119,19 @@ main {
     font-size: 1.2rem;
     font-weight: 900;
 }
-.week-day .weather-icon {
-    display: grid;
-    place-content: center;
-}
+
 .week-day .icon {
     height: 4rem;
 }
 
-.resolved-address {
+.summary .resolved-address {
     grid-column: 1 / -1;
 
     font-size: 1.4rem;
     font-weight: 900;
 }
 
-.weather-icon.summary {
+.summary .weather-icon {
     grid-column: 2 / -1;
     grid-row: 2 / -1;
 
@@ -107,10 +139,11 @@ main {
     text-align: center;
 }
 
-.weather-icon.summary i {
+.summary .weather-icon i {
     font-size: 5rem;
 }
-.temp {
+
+.summary .temp {
     grid-column: 1 / 2;
 
 
@@ -118,20 +151,13 @@ main {
     font-weight: 900;
 }
 
-.datetime {
+.summary .datetime {
     grid-column: 1 / 2;
 
 }
 
-.conditions {
+.summary .conditions {
     grid-column: 1 / 2;
 }
 
-.description {
-    grid-column: 1 / -1;
-}
 
-.minmax {
-    grid-column: 1 / 3;
-    display: flex;
-}

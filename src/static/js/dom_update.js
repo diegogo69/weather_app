@@ -54,6 +54,10 @@ function updateDetails(details, data) {
         const detailNode = details[key]['node'];
 
         // Add text to node. If text
+        if (key === 'description') {
+            detailNode.textContent = data[key];
+            continue
+        }
         const title = document.createElement('header');
         title.classList.add('title');
         title.textContent = capitalize(key);
