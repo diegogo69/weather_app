@@ -5,11 +5,9 @@ function parseWeather (data) {
     console.log(data);
     const resolvedAddress = data.resolvedAddress;
     const today = data.days[0];
-    // create new array of following days without today
-    const days = [...data['days']];
-    days.shift();
-
     const parsedToday = parseToday(today);
+    // create new array of following days without today
+    const days = data['days'].slice(1);
 
     return {resolvedAddress, days, ...parsedToday}
 }
