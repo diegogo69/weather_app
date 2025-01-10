@@ -26,7 +26,10 @@ function updateSummary(summary, data) {
     for (let key in summary) {
         switch (key) {
             case 'datetime':
-                summary[key].textContent = format(data[key], 'EEEE, MMM do');
+                // Somehow the dot at the end normalizes the date
+                const datetime = `${data[key]}.`;
+                const dateObj = new Date(datetime);
+                summary[key].textContent = format(dateObj, 'EEEE, MMM do');
                 break;
             case 'temp':
                 summary[key].textContent = `${data[key]} °F`;
@@ -99,13 +102,22 @@ function updateWeek(weekDays, data) {
         const iconNode = weekDays[i].querySelector('.weather-icon');
         const conditions = weekDays[i].querySelector('.conditions');
 
-        if (i === 0) {
-            dayNode.textContent = 'Tomorrow';
-        } else {
-            // Somehow the dot at the end normalizes the date
-            const datetime = `${data[i]['datetime']}.`;
-            dayNode.textContent = format(new Date(datetime), 'EEEE');
+        let dayString = '';
+        switch (i) {
+            case 0:
+                dayString += 'Tomorrow';
+                break;
+            case (data.length - 1):
+                dayString += 'Next ';
+                // No break, bcs 'Next ...day'
+            default:
+                // Somehow the dot at the end normalizes the date
+                const datetime = `${data[i]['datetime']}.`;
+                const dateObj = new Date(datetime);
+                dayString += format(dateObj, 'EEEE');
+                break;
         }
+        dayNode.textContent = dayString;
 
         const icon = data[i]['icon'].replaceAll('-', '_');
 
