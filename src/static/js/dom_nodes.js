@@ -28,6 +28,7 @@ const domNodes = {
     },
     days: {
         node: null,
+        children: null
     },
 }
 
