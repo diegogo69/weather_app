@@ -5,18 +5,19 @@ import { icons } from "./icons";
 import { clearNode } from "./dom_handlers";
 import { domNodes } from "./dom_nodes";
 import { capitalize } from "./handlers";
+import { detailsInfo } from "./details_info";
 
 function domUpdate(data) {
     for (let key in domNodes) {
         switch (key) {
             case 'summary':
-                updateSummary(domNodes[key], data);
+                updateSummary(domNodes[key]['children'], data);
                 break;
             case 'details':
-                updateDetails(domNodes[key], data);
+                updateDetails(domNodes[key]['children'], data);
                 break;
             case 'days':
-                updateWeek(domNodes[key], data[key]);
+                updateWeek(domNodes[key]['children'], data[key]);
                 break;
         }
     }
@@ -54,25 +55,37 @@ function updateSummary(summary, data) {
 }
 
 // function updateDetails( { description, tempmin, tempmax, feelslike, humidiy, windspeed, moonphase, sunrise, sunset}) {
-function updateDetails(details, data) {
-    for (let key in details) {
+function updateDetails(nodes, data, info=detailsInfo) {
+    for (let key in nodes) {
         // Item of details elements
-        const detailNode = details[key]['node'];
+        const detailNode = nodes[key];
+        console.log(detailNode);
 
         // Add text to node. If text
         if (key === 'description') {
             detailNode.textContent = data[key];
             continue
         }
-        const title = document.createElement('header');
-        title.classList.add('title');
+        let title = detailNode.querySelector('.title');
+        
+        if (!title) {
+            title = document.createElement('header');
+            title.classList.add('title');
+            detailNode.appendChild(title);
+        }
+        // Will it work?
         title.textContent = capitalize(key);
-        detailNode.appendChild(title);
 
-        const unit = details[key]['unit'] || '';
+        const unit = info[key]['unit'] || '';
 
-        const text = document.createElement('p');
-        text.classList.add('text');
+        let text = detailNode.querySelector('.text');
+
+        if (!text) {
+            text = document.createElement('p');
+            text.classList.add('text');
+            // Will it work
+            detailNode.appendChild(text);
+        }
 
         if (unit === 'hour') {
             // Ramdon date for formatting time as 12h am/pm 
@@ -81,15 +94,19 @@ function updateDetails(details, data) {
         } else {
             text.textContent = `${data[key]}${unit}`;
         }
-        detailNode.appendChild(text);
 
-        const iconName = details[key]['icon'];
+        const iconName = info[key]['icon'];
 
         if (iconName) {
-            const icon = document.createElement('div');
-            icon.classList.add('icon');
+            let icon = detailNode.querySelector('.icon');
+
+            if (!icon) {
+                icon = document.createElement('div');
+                icon.classList.add('icon');
+                detailNode.appendChild(icon);
+            }
+
             icon.innerHTML = `<i class="wi wi-${iconName}"></i>`
-            detailNode.appendChild(icon);
         }
     }
 }
