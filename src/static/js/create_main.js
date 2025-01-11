@@ -1,6 +1,6 @@
 export { createMainElements }
 
-import { WEEK_DAYS } from "./fetch_weather";
+import { WEEK_DAYS } from "./app_values";
 
 function createMainElements(domElements) {
     const main = document.querySelector('main');

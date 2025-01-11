@@ -59,7 +59,7 @@ function updateDetails(nodes, data, info=detailsInfo) {
     for (let key in nodes) {
         // Item of details elements
         const detailNode = nodes[key];
-        console.log(detailNode);
+        // console.log(detailNode);
 
         // Add text to node. If text
         if (key === 'description') {

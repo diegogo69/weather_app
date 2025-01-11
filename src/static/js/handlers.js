@@ -1,6 +1,7 @@
 export { handlers, capitalize }
 
 import { fetchWeather } from "./fetch_weather";
+import { urlQuery } from "./url_query";
 import { parseWeather } from "./parseWeather";
 import { domUpdate } from "./dom_update";
 
@@ -11,10 +12,12 @@ const handlers = ( function() {
 
         const searchInput = this.querySelector('#search');
 
-        const search = searchInput.value;
+        const location = searchInput.value;
         
-        if (!search) { return }
-        const weather = await fetchWeather(search);
+        if (!location) { return }
+        // Pass lang and unitGroup
+        const url = urlQuery({ location, lang:'es', unitGroup:'metric' });
+        const weather = await fetchWeather(url);
         const parsed = parseWeather(weather);
 
         // fetchWeather(search)

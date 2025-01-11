@@ -1,5 +1,5 @@
 export { WEEK_DAYS}
-export { API_KEY, date1, date2 }
+export { API_KEY, DATE1, DATE2 }
 export { appValues }
 
 import { format, addDays } from "date-fns";
@@ -7,8 +7,8 @@ import { format, addDays } from "date-fns";
 const appValues = (function () {
     const WEEK_DAYS = 7;
     const API_KEY = 'JEPSLX6ZDSGFY6GFXGTRNWS9J';
-    const date1 = format(new Date(), 'yyyy-MM-dd');
-    const date2 = format(addDays(new Date(), WEEK_DAYS), 'yyyy-MM-dd');
+    const DATE1 = format(new Date(), 'yyyy-MM-dd');
+    const DATE2 = format(addDays(new Date(), WEEK_DAYS), 'yyyy-MM-dd');
 
     let lang = 'en';
 
@@ -31,7 +31,7 @@ const appValues = (function () {
     }
 
     return {
-        WEEK_DAYS, API_KEY, date1, date2,
+        WEEK_DAYS, API_KEY, DATE1, DATE2,
         getLang, changeLang,
         getUnitGroup, changeUnitGroup
     }
@@ -40,6 +40,6 @@ const appValues = (function () {
 const {
     WEEK_DAYS,
     API_KEY,
-    date1,
-    date2
+    DATE1,
+    DATE2
 } = appValues;
