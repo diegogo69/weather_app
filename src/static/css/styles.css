@@ -31,9 +31,11 @@ body > header {
 
 main {
     flex: 1;
+
     display: grid;
-    grid-template-columns: minmax(600px, 1fr) minmax(800px , 2fr);
-    grid-template-rows: minmax(auto, 2fr) minmax(auto, 1fr);
+    grid-template-columns: minmax(500px, 2fr) minmax(500px , 3fr);
+    grid-template-rows: 2fr 1fr;
+    grid-template-rows: minmax(300px, 400px) minmax(auto, 300px);
     grid-template-areas: 
         'summary details'
         'week week';
@@ -156,7 +158,7 @@ main {
     font-size: 3.5rem;
 }
 
-.week-container {
+.days-container {
     grid-area: week;
     display: flex;
     gap: 1rem;
@@ -164,7 +166,9 @@ main {
 
 .week-day {
     flex: 1;
-    display: grid;
+    width: 220px;
+    height: 200px;
+      display: grid;
     gap: .4rem;
     justify-items: center;
     align-items: center;

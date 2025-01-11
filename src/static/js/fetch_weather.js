@@ -1,12 +1,12 @@
-export { fetchWeather };
+export { fetchWeather, WEEK_DAYS };
 import { format } from "date-fns";
 import { addDays } from "date-fns";
 
-const NEXT_DAYS = 7;
+const WEEK_DAYS = 7;
 
 const API_KEY = 'JEPSLX6ZDSGFY6GFXGTRNWS9J';
 const date1 = format(new Date(), 'yyyy-MM-dd');
-const date2 = format(addDays(new Date(), NEXT_DAYS), 'yyyy-MM-dd');
+const date2 = format(addDays(new Date(), WEEK_DAYS), 'yyyy-MM-dd');
 
 console.log(date1);
 console.log(date2);
