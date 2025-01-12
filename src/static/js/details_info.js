@@ -4,19 +4,19 @@ const detailsInfo = {
         name: 'tempmin',
         class: 'tempmin',
         icon: 'thermometer-exterior',
-        unit: '°F'
+        unit: 'temp'
     },
     tempmax: {
         name: 'tempmax',
         class: 'tempmax',
         icon: 'thermometer',
-        unit: '°F'
+        unit: 'temp'
     },
     humidity: {
         name: 'humidity',
         class: 'humidity',
         icon: 'humidity',
-        unit: '%'
+        unit: 'percent'
     },
     // moonphase,
     sunrise: {
@@ -35,6 +35,6 @@ const detailsInfo = {
         name: 'windspeed',
         class: 'windspeed',
         icon: 'strong-wind',
-        unit: 'mph'
+        unit: 'speed'
     }
 }
