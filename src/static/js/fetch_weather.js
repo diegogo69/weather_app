@@ -1,6 +1,14 @@
 export { fetchWeather };
 
 async function fetchWeather(url) {
-    const fetchResponse = await fetch(url, {mode: 'cors'});
-    return await fetchResponse.json();
+    try {
+        const response = await fetch(url, { mode: 'cors' });
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        
+    } catch (error) {
+        throw error;
+    }
 }
