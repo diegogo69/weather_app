@@ -6,6 +6,9 @@ import { clearNode } from "./dom_handlers";
 import { domNodes } from "./dom_nodes";
 import { capitalize } from "./handlers";
 import { detailsInfo } from "./details_info";
+import { appValues } from "./app_values";
+
+const { WEEK_DAYS } = appValues; 
 
 function domUpdate(data) {
     for (let key in domNodes) {
@@ -24,6 +27,9 @@ function domUpdate(data) {
 }
 
 function updateSummary(summary, data) {
+    const tempUnit = appValues.units.temp;
+    const speedUnit = appValues.units.speed;
+
     for (let key in summary) {
         switch (key) {
             case 'datetime':
@@ -33,10 +39,10 @@ function updateSummary(summary, data) {
                 summary[key].textContent = format(dateObj, 'EEEE, MMM do');
                 break;
             case 'temp':
-                summary[key].textContent = `${data[key]} °F`;
+                summary[key].textContent = `${data[key]} ${tempUnit}`;
                 break;
             case 'feelslike':
-                summary[key].textContent = `Feelslike ${data[key]} °F`;
+                summary[key].textContent = `Feelslike ${data[key]} ${tempUnit}`;
                 break;
             case 'icon':
                 const icon = data[key].replaceAll('-', '_');
@@ -76,10 +82,27 @@ function updateDetails(nodes, data, info=detailsInfo) {
         // Will it work?
         title.textContent = capitalize(key);
 
-        const unit = info[key]['unit'] || '';
+        let unit;
+        switch (info[key]['unit']) {
+            case 'temp':
+                unit = ` ${appValues.units.temp}`;
+                break;
+            case 'speed':
+                unit = ` ${appValues.units.speed}`;
+                break;
+            case 'percent':
+                unit = appValues.units.percent;
+                break;
+            case 'hour':
+                unit = info[key]['unit'];
+                break;
+            default:
+                unit = '';
+                break;
+        }
 
         let text = detailNode.querySelector('.text');
-
+        // No text node (At start)
         if (!text) {
             text = document.createElement('p');
             text.classList.add('text');
@@ -90,7 +113,7 @@ function updateDetails(nodes, data, info=detailsInfo) {
         if (unit === 'hour') {
             // Ramdon date for formatting time as 12h am/pm 
             const date = `2011-11-11T${data[key]}`;
-            text.textContent = format(date, 'hh:mmaaa')
+            text.textContent = format(date, 'hh:mm aaaa')
         } else {
             text.textContent = `${data[key]}${unit}`;
         }
@@ -114,7 +137,7 @@ function updateDetails(nodes, data, info=detailsInfo) {
 function updateWeek(weekDays, data) {
     console.log(format(new Date(), 'EEEE'))
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < WEEK_DAYS; i++) {
         const dayNode = weekDays[i].querySelector('.day');
         const iconNode = weekDays[i].querySelector('.weather-icon');
         const conditions = weekDays[i].querySelector('.conditions');
@@ -124,7 +147,7 @@ function updateWeek(weekDays, data) {
             case 0:
                 dayString += 'Tomorrow';
                 break;
-            case (data.length - 1):
+            case (WEEK_DAYS - 1):
                 dayString += 'Next ';
                 // No break, bcs 'Next ...day'
             default:
