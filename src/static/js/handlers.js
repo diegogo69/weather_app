@@ -13,22 +13,24 @@ const handlers = ( function() {
 
         const searchInput = this.querySelector('#search');
 
-        const location = searchInput.value;
+        const search = searchInput.value;
         
-        if (!location) { return }
-        // Pass lang and unitGroup
-        const url = urlQuery({ location, lang:'es', unitGroup:'metric' });
+        if (!search) { return }
+
+        appValues.setLocation(search);
+        
+        await queryWeather();
+    }
+    
+    async function queryWeather() {
+        const url = urlQuery();
         const weather = await fetchWeather(url);
         const parsed = parseWeather(weather);
-
-        // fetchWeather(search)
-        // .then(parseWeather(weather))
-        // .then(console.log(parsed))
-        console.log(parsed)
         domUpdate(parsed);
+        // return parsed;
     }
 
-    function unitgroup(e) {
+    async function unitgroup(e) {
         // Check current unit and change it
         const target = e.currentTarget;
         const unit = target.querySelector('a');
@@ -40,9 +42,10 @@ const handlers = ( function() {
         } else {
             unit.textContent = appValues.METRIC;
         }
+        if (appValues.getLocation()) { await queryWeather() }
     }
     
-    function lang(e) {
+    async function lang(e) {
         // Check current unit and change it
         const target = e.currentTarget;
         const unit = target.querySelector('a');
@@ -56,6 +59,8 @@ const handlers = ( function() {
             document.body.setAttribute('lang', 'es')
             unit.textContent = appValues.EN;
         }
+        
+        if (appValues.getLocation()) { await queryWeather() }
     }
 
     return {
