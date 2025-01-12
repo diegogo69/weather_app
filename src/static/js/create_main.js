@@ -1,6 +1,8 @@
 export { createMainElements }
 
-import { WEEK_DAYS } from "./app_values";
+import { appValues } from "./app_values";
+
+const { WEEK_DAYS } = appValues;
 
 function createMainElements(domElements) {
     const main = document.querySelector('main');
