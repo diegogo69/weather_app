@@ -18,7 +18,6 @@ const detailsInfo = {
         icon: 'humidity',
         unit: 'percent'
     },
-    // moonphase,
     sunrise: {
         name: 'sunrise',
         class: 'sunrise',

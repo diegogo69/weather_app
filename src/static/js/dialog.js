@@ -3,7 +3,7 @@ export { dialogNode }
 const dialogNode = document.querySelector("dialog");
 const closeButton = dialogNode.querySelector("button");
 
-// dialogNode.showModal();
+// Avoid clash with document click handler
 dialogNode.addEventListener("click", function(e) {
     e.stopPropagation();
 })

@@ -11,7 +11,6 @@ const loader = document.querySelector('.loader-wrapper');
 
 const handlers = ( function() {
     async function searchWeather(e) {
-        console.log('worfks?')
         e.preventDefault();
 
         const searchInput = this.querySelector('#search');
@@ -29,14 +28,13 @@ const handlers = ( function() {
         const url = urlQuery();
 
         loader.style.display = 'block';
+
         const response = await fetchWeather(url);
-        console.log('fetched');
         const parsed = await response.json();
-        console.log('parsed');
         const weather = parseWeather(parsed);
         domUpdate(weather);
+
         loader.style.display = 'none';
-        // return parsed;
     }
 
     function errorHandler(err) {

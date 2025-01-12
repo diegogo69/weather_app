@@ -65,7 +65,6 @@ function updateDetails(nodes, data, info=detailsInfo) {
     for (let key in nodes) {
         // Item of details elements
         const detailNode = nodes[key];
-        // console.log(detailNode);
 
         // Add text to node. If text
         if (key === 'description') {
@@ -79,7 +78,6 @@ function updateDetails(nodes, data, info=detailsInfo) {
             title.classList.add('title');
             detailNode.appendChild(title);
         }
-        // Will it work?
         title.textContent = capitalize(key);
 
         let unit;
@@ -106,7 +104,6 @@ function updateDetails(nodes, data, info=detailsInfo) {
         if (!text) {
             text = document.createElement('p');
             text.classList.add('text');
-            // Will it work
             detailNode.appendChild(text);
         }
 
@@ -135,7 +132,6 @@ function updateDetails(nodes, data, info=detailsInfo) {
 }
 
 function updateWeek(weekDays, data) {
-    console.log(format(new Date(), 'EEEE'))
 
     for (let i = 0; i < WEEK_DAYS; i++) {
         const dayNode = weekDays[i].querySelector('.day');

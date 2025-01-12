@@ -21,7 +21,6 @@ const domNodes = {
             tempmax: null,
             humidity: null,
             windspeed: null,
-            // moonphase,
             sunrise: null,
             sunset: null,
         }
