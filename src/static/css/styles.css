@@ -1,5 +1,5 @@
 svg {
-    width: 24px;
+    width: 32px;
 }
 
 * {
@@ -8,29 +8,70 @@ svg {
     padding: 0;
 }
 
-body:has(dialog[open]) {
-    filter: blur(4px);
-}
 
 body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    background-color: var(--bg2);
+    background-color: var(--light);
     color: var(--dark);
 
-    --bg: #dbeafe;
-    --bg2: #afbff5;
-    --bg3: #e5eff3;
-    --dark: #09090b;
+    --bg-dark: #001f54;
+    --bg-light: #70a2ff;
+    --bg: #034078;
+    --dark: #1c2541;
+    --highlight: #2f4550;
+    --light: #fefcfb;
 }
 
 body > header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
-    height: 4rem;
-    padding: 0 2rem;
+    padding: 2rem;
+}
+
+.app-logo {
+    font-size: 1.4rem;
+}
+
+.search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.search-form button {
+    width: 4rem;
+    height: 3.2rem;
+    display: grid;
+    place-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-search svg {
+    width: 36px;
+}
+.search-form button:hover,
+.search-form button:focus {
+    background-color: var(--bg-light);
+    fill: var(--light);
+}
+
+.search-form input {
+    width: 60ch;
+    padding: .4rem 1.2rem;
+    font-size: 1.4rem;
+    border-radius: 1.5rem;
+}
+
+.search-form input:focus {
+    box-shadow: inset 3px 3px 4px 0 #eee;
+    outline: none;
 }
 
 main {
@@ -38,25 +79,24 @@ main {
 
     display: grid;
     grid-template-columns: minmax(500px, 2fr) minmax(500px , 3fr);
-    grid-template-rows: 2fr 1fr;
-    grid-template-rows: minmax(300px, 400px) minmax(auto, 300px);
+    grid-template-rows: minmax(300px, 360px) minmax(auto, 300px);
     grid-template-areas: 
         'summary details'
         'week week';
     gap: 1rem;
-    padding: 1rem 2rem 2rem;
+    padding: 1rem 3rem 2rem;
     
 }
 
-.search-form {
-    display: flex;
-    align-items: center;
+.icon {
+    user-select: none;
+    color: var(--highlight)
 }
+
 
 .summary-container,
 .details-container,
 .week-day {
-    background-color: var(--bg3);
     border-radius: 1rem;
     padding: 1rem;
 
@@ -65,7 +105,7 @@ main {
 .summary-container {
     grid-area: summary;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(220px,2fr) 3fr;
     grid-template-rows: auto auto 2fr 1fr 1fr;
 
     font-weight: 900;
@@ -75,14 +115,15 @@ main {
 .summary .weather-icon {
     grid-column: 2 / -1;
     grid-row: 2 / -1;
+    align-self: center;
 
-    padding: .8rem 0 0 0;
+    padding: 0 0 2rem 0;
     text-align: center;
-
 }
 
-.summary .weather-icon i {
-    font-size: 5rem;
+.summary .weather-icon img {
+    max-width: 24rem;
+    height: auto;
 }
 
 .summary .resolved-address {
@@ -192,7 +233,30 @@ main {
     height: 4rem;
 }
 
+
+
+body:has(dialog[open]) {
+    filter: blur(4px);
+}
+
 dialog {
     align-self: center;
 	justify-self: center;
+
+    padding: 1.2rem;
+    border: none;
+    border-radius: 1rem;
+}
+
+dialog button {
+    display: block;
+    margin-top: .4rem;
+    margin-left: auto;
+
+    padding: .4rem 1.4rem;
+    background-color: lightskyblue;
+    color: white;
+    outline: none;
+    border:none;
+    border-radius: .5rem;
 }
