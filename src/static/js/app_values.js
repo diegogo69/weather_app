@@ -16,6 +16,18 @@ const appValues = (function () {
     const ES = 'Español';
     const EN = 'English';
 
+    let location;
+
+    function  getLocation() {
+        return location;
+    }
+
+    function setLocation(val) {
+        location = val;
+        return location;
+    }
+
+
     let lang = 'en';
 
     function getLang() {
@@ -38,9 +50,10 @@ const appValues = (function () {
 
     return {
         WEEK_DAYS, API_KEY, DATE1, DATE2,
+        METRIC, US, ES, EN,
         getLang, changeLang,
         getUnitGroup, changeUnitGroup,
-        METRIC, US, ES, EN,
+        getLocation, setLocation
     }
 })()
 
