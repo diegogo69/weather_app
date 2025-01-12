@@ -1,6 +1,5 @@
-export { urlQuery }
+import appValues from "./app_values";
 
-import { appValues } from "./app_values";
 
 const { API_KEY, DATE1, DATE2 } = appValues;
 
@@ -11,3 +10,5 @@ function urlQuery(location = appValues.getLocation(), unitGroup = appValues.getU
     console.log(url);
     return url;
 }
+
+export { urlQuery }

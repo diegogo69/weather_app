@@ -4,7 +4,7 @@ import { fetchWeather } from "./fetch_weather";
 import { urlQuery } from "./url_query";
 import { parseWeather } from "./parseWeather";
 import { domUpdate } from "./dom_update";
-import { appValues } from "./app_values";
+import appValues from "./app_values";
 import { dialogNode } from "./dialog";
 
 const loader = document.querySelector('.loader-wrapper');

@@ -1,5 +1,3 @@
-export { appValues }
-
 import { format, addDays } from "date-fns";
 
 const appValues = (function () {
@@ -59,6 +57,8 @@ const appValues = (function () {
                 units.temp = '°C';
                 units.speed = 'km/h';
                 break;
+            default:
+                break;
         }
     }
 
@@ -70,3 +70,5 @@ const appValues = (function () {
         getLocation, setLocation,
     }
 })();
+
+export default appValues

@@ -219,9 +219,6 @@ main {
 }
 
 .week-day {
-    /* flex: 1; */
-    /* width: 220px; */
-    /* height: 200px; */
     display: grid;
     grid-template-rows: max-content 5rem min-content;
     gap: .5rem;

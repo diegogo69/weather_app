@@ -6,7 +6,7 @@ import { clearNode } from "./dom_handlers";
 import { domNodes } from "./dom_nodes";
 import { capitalize } from "./handlers";
 import { detailsInfo } from "./details_info";
-import { appValues } from "./app_values";
+import appValues from "./app_values";
 
 const { WEEK_DAYS } = appValues; 
 
