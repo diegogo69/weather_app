@@ -8,6 +8,10 @@ svg {
     padding: 0;
 }
 
+body:has(dialog[open]) {
+    filter: blur(4px);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -188,4 +192,7 @@ main {
     height: 4rem;
 }
 
-
+dialog {
+    align-self: center;
+	justify-self: center;
+}

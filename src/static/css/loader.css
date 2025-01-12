@@ -1,0 +1,31 @@
+.loader-wrapper {
+    background-color: #fefcfb;
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    width: 4rem;
+    height: 3.2rem;
+    align-content: center;
+}
+
+.loader {
+    margin: auto;
+    width: 2rem;
+    height: 2rem;
+    border: .4rem solid #f3f3f3; /* Light grey */
+    border-top: .4rem solid #3498db; /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

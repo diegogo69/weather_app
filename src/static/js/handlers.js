@@ -28,7 +28,9 @@ const handlers = ( function() {
         const url = urlQuery();
 
         const response = await fetchWeather(url);
+        console.log('fetched');
         const parsed = await response.json();
+        console.log('parsed');
         const weather = parseWeather(parsed);
         domUpdate(weather);
         // return parsed;
@@ -53,27 +55,9 @@ const handlers = ( function() {
         if (appValues.getLocation()) { await queryWeather().catch(errorHandler) }
     }
     
-    async function lang(e) {
-        // Check current unit and change it
-        const target = e.currentTarget;
-        const unit = target.querySelector('a');
-
-        appValues.changeLang();
-        
-        if (appValues.getLang() === 'en') {
-            document.body.setAttribute('lang', 'en')
-            unit.textContent = appValues.ES;
-        } else {
-            document.body.setAttribute('lang', 'es')
-            unit.textContent = appValues.EN;
-        }
-        
-        if (appValues.getLocation()) { await queryWeather().catch(errorHandler); }
-    }
-
     return {
         searchWeather,
-        unitgroup, lang,
+        unitgroup,
     }
 } )()
 
