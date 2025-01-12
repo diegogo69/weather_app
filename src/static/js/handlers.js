@@ -5,6 +5,7 @@ import { urlQuery } from "./url_query";
 import { parseWeather } from "./parseWeather";
 import { domUpdate } from "./dom_update";
 import { appValues } from "./app_values";
+import { dialogNode } from "./dialog";
 
 const handlers = ( function() {
     async function searchWeather(e) {
@@ -19,16 +20,22 @@ const handlers = ( function() {
 
         appValues.setLocation(search);
         
-        await queryWeather();
+        await queryWeather().catch(errorHandler);
     }
     
     async function queryWeather() {
         console.log('Fetching...');
         const url = urlQuery();
-        const weather = await fetchWeather(url);
-        const parsed = parseWeather(weather);
-        domUpdate(parsed);
+
+        const response = await fetchWeather(url);
+        const parsed = await response.json();
+        const weather = parseWeather(parsed);
+        domUpdate(weather);
         // return parsed;
+    }
+
+    function errorHandler(err) {
+        dialogNode.show();
     }
 
     async function unitgroup(e) {
@@ -43,7 +50,7 @@ const handlers = ( function() {
         } else {
             unit.textContent = appValues.units.metric;
         }
-        if (appValues.getLocation()) { await queryWeather() }
+        if (appValues.getLocation()) { await queryWeather().catch(errorHandler) }
     }
     
     async function lang(e) {
@@ -61,7 +68,7 @@ const handlers = ( function() {
             unit.textContent = appValues.EN;
         }
         
-        if (appValues.getLocation()) { await queryWeather() }
+        if (appValues.getLocation()) { await queryWeather().catch(errorHandler); }
     }
 
     return {
