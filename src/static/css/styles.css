@@ -7,7 +7,6 @@ svg {
     padding: 0;
 }
 
-
 body {
     height: 100vh;
     display: flex;
@@ -24,12 +23,34 @@ body {
 }
 
 body > header {
+    height: 7rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 2rem;
+    padding: 1rem;
 }
+
+main {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: minmax(500px, 2fr) minmax(500px , 3fr);
+    grid-template-rows: minmax(300px, 320px) minmax(auto, 240px);
+    grid-template-areas: 
+        'summary details'
+        'week week';
+    gap: 1rem;
+    padding: 0 2rem ;
+}
+
+body > footer {
+    height: 4rem;
+    padding: 1rem;
+    display: grid;
+    place-content: center;
+}
+
 
 .app-logo {
     font-size: 1.4rem;
@@ -73,18 +94,13 @@ body > header {
     outline: none;
 }
 
-main {
-    flex: 1;
+.search-form input::placeholder{
+    color: #bbb;
+}
 
-    display: grid;
-    grid-template-columns: minmax(500px, 2fr) minmax(500px , 3fr);
-    grid-template-rows: minmax(300px, 360px) minmax(auto, 300px);
-    grid-template-areas: 
-        'summary details'
-        'week week';
-    gap: 1rem;
-    padding: 1rem 2rem 2rem;
-    
+footer a {
+    text-decoration: none;
+    color: var(--bg-light);
 }
 
 .icon {
@@ -106,6 +122,7 @@ main {
     display: grid;
     grid-template-columns: minmax(220px,2fr) 3fr;
     grid-template-rows: auto auto 2fr 1fr 1fr;
+    justify-content: center;
 
     font-weight: 900;
 
@@ -168,7 +185,8 @@ main {
 .details-container {
     grid-area: details;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: space-around;
     grid-template-rows: 1fr 2fr 2fr;
 }
 
