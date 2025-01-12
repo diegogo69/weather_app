@@ -15,7 +15,8 @@ const handlers = ( function() {
 
         const searchInput = this.querySelector('#search');
 
-        const search = searchInput.value;
+        const search = searchInput.value.trim();
+        searchInput.value = search;
         
         if (!search) { return }
 
