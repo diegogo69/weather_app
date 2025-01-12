@@ -12,6 +12,7 @@ unitgroupSet.addEventListener('click', handlers.unitgroup);
 function initSearchForm() {
         // Search event listener
         searchForm.addEventListener('submit', handlers.searchWeather);
+        // Test value
         searchForm.querySelector('#search').value = 'caracas';
 
         initDropdown();

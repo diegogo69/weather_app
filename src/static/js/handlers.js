@@ -7,6 +7,8 @@ import { domUpdate } from "./dom_update";
 import { appValues } from "./app_values";
 import { dialogNode } from "./dialog";
 
+const loader = document.querySelector('.loader-wrapper');
+
 const handlers = ( function() {
     async function searchWeather(e) {
         console.log('worfks?')
@@ -24,22 +26,25 @@ const handlers = ( function() {
     }
     
     async function queryWeather() {
-        console.log('Fetching...');
         const url = urlQuery();
 
+        loader.style.display = 'block';
         const response = await fetchWeather(url);
         console.log('fetched');
         const parsed = await response.json();
         console.log('parsed');
         const weather = parseWeather(parsed);
         domUpdate(weather);
+        loader.style.display = 'none';
         // return parsed;
     }
 
     function errorHandler(err) {
-        dialogNode.show();
+        loader.style.display = 'none';
+        dialogNode.showModal();
     }
 
+    
     async function unitgroup(e) {
         // Check current unit and change it
         const target = e.currentTarget;
