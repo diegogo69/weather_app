@@ -3,9 +3,17 @@ export { initSearchForm }
 
 import { handlers } from "./handlers";
 
+const searchForm = document.querySelector('.search-form');
+
+const unitgroupSet = searchForm.querySelector('.unitgroup');
+unitgroupSet.addEventListener('click', handlers.unitgroup);
+
+const langSet = searchForm.querySelector('.lang');
+langSet.addEventListener('click', handlers.lang);
+
+
 function initSearchForm() {
         // Search event listener
-        const searchForm = document.querySelector('.search-form');
         searchForm.addEventListener('submit', handlers.searchWeather);
         searchForm.querySelector('#search').value = 'caracas';
 

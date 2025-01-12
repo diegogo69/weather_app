@@ -10,6 +10,12 @@ const appValues = (function () {
     const DATE1 = format(new Date(), 'yyyy-MM-dd');
     const DATE2 = format(addDays(new Date(), WEEK_DAYS), 'yyyy-MM-dd');
 
+    const METRIC = 'Km/h - °C';
+    const US = 'Mph - °F';
+
+    const ES = 'Español';
+    const EN = 'English';
+
     let lang = 'en';
 
     function getLang() {
@@ -33,7 +39,8 @@ const appValues = (function () {
     return {
         WEEK_DAYS, API_KEY, DATE1, DATE2,
         getLang, changeLang,
-        getUnitGroup, changeUnitGroup
+        getUnitGroup, changeUnitGroup,
+        METRIC, US, ES, EN,
     }
 })()
 

@@ -4,6 +4,7 @@ import { fetchWeather } from "./fetch_weather";
 import { urlQuery } from "./url_query";
 import { parseWeather } from "./parseWeather";
 import { domUpdate } from "./dom_update";
+import { appValues } from "./app_values";
 
 const handlers = ( function() {
     async function searchWeather(e) {
@@ -26,9 +27,40 @@ const handlers = ( function() {
         console.log(parsed)
         domUpdate(parsed);
     }
+
+    function unitgroup(e) {
+        // Check current unit and change it
+        const target = e.currentTarget;
+        const unit = target.querySelector('a');
+
+        appValues.changeUnitGroup();
+
+        if (appValues.getUnitGroup() === 'us') {
+            unit.textContent = appValues.US;
+        } else {
+            unit.textContent = appValues.METRIC;
+        }
+    }
     
+    function lang(e) {
+        // Check current unit and change it
+        const target = e.currentTarget;
+        const unit = target.querySelector('a');
+
+        appValues.changeLang();
+        
+        if (appValues.getLang() === 'en') {
+            document.body.setAttribute('lang', 'en')
+            unit.textContent = appValues.ES;
+        } else {
+            document.body.setAttribute('lang', 'es')
+            unit.textContent = appValues.EN;
+        }
+    }
+
     return {
         searchWeather,
+        unitgroup, lang,
     }
 } )()
 
