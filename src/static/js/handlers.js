@@ -51,9 +51,9 @@ const handlers = ( function() {
         appValues.changeUnitGroup();
 
         if (appValues.getUnitGroup() === 'us') {
-            unit.textContent = appValues.units.us;
-        } else {
             unit.textContent = appValues.units.metric;
+        } else {
+            unit.textContent = appValues.units.us;
         }
         if (appValues.getLocation()) { await queryWeather().catch(errorHandler) }
     }
