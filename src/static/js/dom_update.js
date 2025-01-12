@@ -47,7 +47,7 @@ function updateSummary(summary, data) {
             case 'icon':
                 const icon = data[key].replaceAll('-', '_');
                 const img = document.createElement('img');
-                img.classList.add('icon', 'weather-icon');
+                img.classList.add('icon');
                 img.src = icons[icon];
 
                 clearNode(summary[key]);
