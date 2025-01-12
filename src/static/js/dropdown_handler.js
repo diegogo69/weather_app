@@ -1,6 +1,7 @@
 // Toggle dropdown
 export { initSearchForm }
 
+import { dialogNode } from "./dialog";
 import { handlers } from "./handlers";
 
 const searchForm = document.querySelector('.search-form');
@@ -8,17 +9,12 @@ const searchForm = document.querySelector('.search-form');
 const unitgroupSet = searchForm.querySelector('.unitgroup');
 unitgroupSet.addEventListener('click', handlers.unitgroup);
 
-const langSet = searchForm.querySelector('.lang');
-langSet.addEventListener('click', handlers.lang);
-
-
 function initSearchForm() {
         // Search event listener
         searchForm.addEventListener('submit', handlers.searchWeather);
         searchForm.querySelector('#search').value = 'caracas';
 
         initDropdown();
-
 }
 
 function initDropdown() {
@@ -39,6 +35,9 @@ function initDropdown() {
                 // toggleDropdown();
                 dropdownMenu.classList.toggle("show");
             }
+            
+            // ADD CLOSE DIALOG ON CLICK ANYWHWERE IN PAGE
+            dialogNode.close();
         });
     });
     
