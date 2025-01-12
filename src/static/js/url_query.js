@@ -1,7 +1,8 @@
 export { urlQuery }
 
-import { API_KEY, DATE1, DATE2 } from "./app_values";
 import { appValues } from "./app_values";
+
+const { API_KEY, DATE1, DATE2 } = appValues;
 
 // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=[YOUR_API_KEY]&include=[days]&unitGroup=[us/metric]&lang[en/es]
 

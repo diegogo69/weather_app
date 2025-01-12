@@ -23,6 +23,7 @@ const handlers = ( function() {
     }
     
     async function queryWeather() {
+        console.log('Fetching...');
         const url = urlQuery();
         const weather = await fetchWeather(url);
         const parsed = parseWeather(weather);
@@ -38,9 +39,9 @@ const handlers = ( function() {
         appValues.changeUnitGroup();
 
         if (appValues.getUnitGroup() === 'us') {
-            unit.textContent = appValues.US;
+            unit.textContent = appValues.units.us;
         } else {
-            unit.textContent = appValues.METRIC;
+            unit.textContent = appValues.units.metric;
         }
         if (appValues.getLocation()) { await queryWeather() }
     }
